@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, Save, Loader2, Video, Globe, Film, Tag, Image as ImageIcon } from 'lucide-react';
-import { Bookmark, BookmarkType } from '@/types/bookmark';
-import { extractVideoInfo, extractWebPageInfo, searchMoviePoster } from '@/lib/extractors';
+import { X, Save, Loader2, Globe, Tag, Image as ImageIcon } from 'lucide-react';
+import { Bookmark } from '@/types/bookmark';
+import { extractLinkInfo, getDomainName } from '@/lib/extractors';
 import ThumbnailSelector from './ThumbnailSelector';
 
 interface EditBookmarkModalProps {
@@ -18,7 +18,6 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
     title: '',
     description: '',
     tags: '',
-    type: 'webpage' as BookmarkType,
     thumbnail: '',
     url: ''
   });
@@ -32,7 +31,6 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
         title: bookmark.title,
         description: bookmark.description || '',
         tags: bookmark.tags.join(', '),
-        type: bookmark.type,
         thumbnail: bookmark.thumbnail,
         url: bookmark.url
       });
@@ -47,7 +45,6 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
       title: '',
       description: '',
       tags: '',
-      type: 'webpage',
       thumbnail: '',
       url: ''
     });
@@ -69,18 +66,12 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
     setError('');
 
     try {
-      let extractedData: any = {};
-
-      if (formData.type === 'video') {
-        extractedData = await extractVideoInfo(formData.url);
-      } else if (formData.type === 'webpage') {
-        extractedData = await extractWebPageInfo(formData.url);
-      }
+      const extractedData = await extractLinkInfo(formData.url);
 
       setFormData(prev => ({
         ...prev,
         title: extractedData.title || prev.title,
-        thumbnail: extractedData.thumbnail || extractedData.poster || prev.thumbnail,
+        thumbnail: extractedData.thumbnail || prev.thumbnail,
         description: extractedData.description || prev.description
       }));
     } catch (error) {
@@ -91,29 +82,6 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
     }
   };
 
-  const handleMovieSearch = async () => {
-    if (!formData.title) {
-      setError('Please enter a movie title first');
-      return;
-    }
-
-    setIsLoading(true);
-    setError('');
-
-    try {
-      const movieData = await searchMoviePoster(formData.title);
-      setFormData(prev => ({
-        ...prev,
-        title: movieData.title || prev.title,
-        thumbnail: movieData.poster || prev.thumbnail
-      }));
-    } catch (error) {
-      setError('Failed to find movie poster');
-      console.error('Movie search error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -131,6 +99,7 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
     const updatedBookmark: Bookmark = {
       ...bookmark,
       title: formData.title,
+      url: formData.url,
       description: formData.description,
       tags: tagsArray,
       thumbnail: formData.thumbnail || bookmark.thumbnail,
@@ -141,16 +110,6 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
     handleClose();
   };
 
-  const getTypeIcon = (type: BookmarkType) => {
-    switch (type) {
-      case 'video':
-        return <Video className="w-4 h-4" />;
-      case 'movie':
-        return <Film className="w-4 h-4" />;
-      default:
-        return <Globe className="w-4 h-4" />;
-    }
-  };
 
   const handleThumbnailSelect = (url: string) => {
     setFormData(prev => ({ ...prev, thumbnail: url }));
@@ -172,7 +131,7 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-                Edit Bookmark
+                Edit Link
               </h2>
               <button
                 onClick={handleClose}
@@ -190,28 +149,32 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
                 </div>
               )}
 
-              {/* Type Display (read-only) */}
+              {/* URL Field */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Content Type
+                  URL <span className="text-red-500">*</span>
                 </label>
-                <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700">
-                  <div className="flex items-center space-x-2 text-slate-600 dark:text-slate-300">
-                    {getTypeIcon(formData.type)}
-                    <span className="capitalize font-medium">{formData.type}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* URL Display (read-only) */}
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  URL
-                </label>
-                <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700">
-                  <p className="text-sm text-slate-600 dark:text-slate-300 truncate">
-                    {formData.url}
-                  </p>
+                <div className="flex space-x-2">
+                  <input
+                    type="url"
+                    value={formData.url}
+                    onChange={(e) => setFormData(prev => ({ ...prev, url: e.target.value }))}
+                    placeholder="https://..."
+                    className="flex-1 px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={handleExtractInfo}
+                    disabled={isLoading || !formData.url}
+                    className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {isLoading ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      'Extract'
+                    )}
+                  </button>
                 </div>
               </div>
 
@@ -220,43 +183,14 @@ export default function EditBookmarkModal({ isOpen, onClose, onSave, bookmark }:
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Title <span className="text-red-500">*</span>
                 </label>
-                <div className="flex space-x-2">
-                  <input
-                    type="text"
-                    value={formData.title}
-                    onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                    placeholder="Bookmark title"
-                    className="flex-1 px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
-                    required
-                  />
-                  {formData.type === 'movie' ? (
-                    <button
-                      type="button"
-                      onClick={handleMovieSearch}
-                      disabled={isLoading || !formData.title}
-                      className="px-4 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      {isLoading ? (
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                      ) : (
-                        'Find Poster'
-                      )}
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={handleExtractInfo}
-                      disabled={isLoading || !formData.url}
-                      className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      {isLoading ? (
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                      ) : (
-                        'Extract'
-                      )}
-                    </button>
-                  )}
-                </div>
+                <input
+                  type="text"
+                  value={formData.title}
+                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                  placeholder="Link title"
+                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                  required
+                />
               </div>
 
               {/* Description Field */}

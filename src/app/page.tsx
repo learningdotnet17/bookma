@@ -174,7 +174,7 @@ export default function Home() {
                 className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 <Plus size={20} className="mr-2" />
-                Add Bookmark
+                Add Link
               </button>
             </div>
           </div>
@@ -262,7 +262,7 @@ export default function Home() {
             </h3>
             <p className="text-slate-500 dark:text-slate-400 mb-4">
               {bookmarks.length === 0 
-                ? "Start by adding your first bookmark!"
+                ? "Start by adding your first link!"
                 : "Try adjusting your search or filters."
               }
             </p>
@@ -272,7 +272,7 @@ export default function Home() {
                 className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 <Plus size={20} className="mr-2" />
-                Add Your First Bookmark
+                Add Your First Link
               </button>
             )}
           </div>

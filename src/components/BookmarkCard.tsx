@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Copy, ExternalLink, Trash2, Video, Globe, Film, Clock, Tag, Edit } from 'lucide-react';
+import { Copy, ExternalLink, Trash2, Globe, Clock, Tag, Edit } from 'lucide-react';
 import { Bookmark } from '@/types/bookmark';
+import { getDomainName } from '@/lib/extractors';
 import SafeImage from './SafeImage';
 
 interface BookmarkCardProps {
@@ -32,26 +33,12 @@ export default function BookmarkCard({ bookmark, viewMode, onDelete, onEdit }: B
     setImageError(true);
   };
 
-  const getTypeIcon = () => {
-    switch (bookmark.type) {
-      case 'video':
-        return <Video className="w-4 h-4" />;
-      case 'movie':
-        return <Film className="w-4 h-4" />;
-      default:
-        return <Globe className="w-4 h-4" />;
-    }
+  const getDomainIcon = () => {
+    return <Globe className="w-4 h-4" />;
   };
 
-  const getTypeColor = () => {
-    switch (bookmark.type) {
-      case 'video':
-        return 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400';
-      case 'movie':
-        return 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400';
-      default:
-        return 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
-    }
+  const getDomainBadgeColor = () => {
+    return 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
   };
 
   const formatDate = (dateString: string) => {
@@ -76,7 +63,7 @@ export default function BookmarkCard({ bookmark, viewMode, onDelete, onEdit }: B
               onError={handleImageError}
               fallback={
                 <div className="w-full h-full flex items-center justify-center">
-                  {getTypeIcon()}
+                  {getDomainIcon()}
                 </div>
               }
             />
@@ -137,9 +124,9 @@ export default function BookmarkCard({ bookmark, viewMode, onDelete, onEdit }: B
             {/* Meta info */}
             <div className="flex items-center justify-between mt-3">
               <div className="flex items-center space-x-3">
-                <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getTypeColor()}`}>
-                  {getTypeIcon()}
-                  <span className="ml-1 capitalize">{bookmark.type}</span>
+                <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getDomainBadgeColor()}`}>
+                  {getDomainIcon()}
+                  <span className="ml-1">{getDomainName(bookmark.url)}</span>
                 </div>
                 
                 <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
@@ -190,17 +177,17 @@ export default function BookmarkCard({ bookmark, viewMode, onDelete, onEdit }: B
           fallback={
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800">
               <div className="text-slate-400 text-center">
-                {getTypeIcon()}
-                <p className="text-xs mt-2 capitalize">{bookmark.type}</p>
+                {getDomainIcon()}
+                <p className="text-xs mt-2">{getDomainName(bookmark.url)}</p>
               </div>
             </div>
           }
         />
 
-        {/* Type badge - only visible on hover */}
-        <div className={`absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getTypeColor()} backdrop-blur-sm`}>
-          {getTypeIcon()}
-          <span className="ml-1 capitalize">{bookmark.type}</span>
+        {/* Domain badge - only visible on hover */}
+        <div className={`absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getDomainBadgeColor()} backdrop-blur-sm`}>
+          {getDomainIcon()}
+          <span className="ml-1">{getDomainName(bookmark.url)}</span>
         </div>
 
         {/* Hover overlay with title and date */}

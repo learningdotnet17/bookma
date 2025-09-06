@@ -10,11 +10,12 @@ export async function POST(request: NextRequest) {
 
     // Use Google Custom Search API for better results
     // For now, we'll use a simplified approach with web scraping
+    // Safe Search is disabled (&safe=off for Google, &adlt=off for Bing) for broader image results
     const searchQuery = encodeURIComponent(`${query} high quality image`);
     
     try {
-      // Try Google Images search
-      const googleUrl = `https://www.google.com/search?q=${searchQuery}&tbm=isch&tbs=isz:m`;
+      // Try Google Images search with Safe Search OFF
+      const googleUrl = `https://www.google.com/search?q=${searchQuery}&tbm=isch&tbs=isz:m&safe=off`;
       
       const response = await fetch(googleUrl, {
         headers: {
@@ -63,9 +64,9 @@ export async function POST(request: NextRequest) {
       console.error('Google search failed:', error);
     }
 
-    // Fallback: Try Bing Image Search
+    // Fallback: Try Bing Image Search with Safe Search OFF
     try {
-      const bingUrl = `https://www.bing.com/images/search?q=${searchQuery}&form=HDRSC2&first=1`;
+      const bingUrl = `https://www.bing.com/images/search?q=${searchQuery}&form=HDRSC2&first=1&adlt=off`;
       
       const bingResponse = await fetch(bingUrl, {
         headers: {

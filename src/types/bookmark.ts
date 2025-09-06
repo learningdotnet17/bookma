@@ -1,10 +1,7 @@
-export type BookmarkType = 'video' | 'webpage' | 'movie';
-
 export interface Bookmark {
   id: string;
   title: string;
   url: string;
-  type: BookmarkType;
   thumbnail: string;
   tags: string[];
   description?: string;
@@ -17,20 +14,8 @@ export interface BookmarkCollection {
   lastUpdated: string;
 }
 
-export interface VideoInfo {
-  title: string;
-  thumbnail: string;
-  platform: string;
-}
-
-export interface WebPageInfo {
+export interface ExtractedInfo {
   title: string;
   thumbnail: string;
   description?: string;
-}
-
-export interface MovieInfo {
-  title: string;
-  poster: string;
-  year?: string;
 }

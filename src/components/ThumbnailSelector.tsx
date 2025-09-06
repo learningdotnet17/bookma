@@ -37,6 +37,24 @@ export default function ThumbnailSelector({
     }
   }, [isOpen, initialQuery]);
 
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+      
+      if (e.key === 'Enter' && selectedUrl) {
+        e.preventDefault();
+        handleSelect();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, selectedUrl]);
+
   const searchImages = async (searchQuery: string) => {
     if (!searchQuery.trim()) return;
 
@@ -187,20 +205,36 @@ export default function ThumbnailSelector({
           </div>
 
           {/* Actions */}
-          <div className="flex space-x-3 p-6 border-t border-slate-200 dark:border-slate-700">
-            <button
-              onClick={onClose}
-              className="flex-1 px-4 py-3 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleSelect}
-              disabled={!selectedUrl}
-              className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Select Thumbnail
-            </button>
+          <div className="p-6 border-t border-slate-200 dark:border-slate-700">
+            {/* Keyboard shortcuts hint */}
+            <div className="flex justify-center mb-4">
+              <div className="flex items-center space-x-4 text-xs text-slate-500 dark:text-slate-400">
+                <div className="flex items-center space-x-1">
+                  <kbd className="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded border text-xs font-mono">Enter</kbd>
+                  <span>to select</span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <kbd className="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded border text-xs font-mono">Esc</kbd>
+                  <span>to cancel</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex space-x-3">
+              <button
+                onClick={onClose}
+                className="flex-1 px-4 py-3 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSelect}
+                disabled={!selectedUrl}
+                className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Select Thumbnail
+              </button>
+            </div>
           </div>
         </div>
       </div>
