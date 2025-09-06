@@ -1,0 +1,230 @@
+{
+  "bookmarks": [
+    {
+      "id": "d9d5d004-149b-47a7-9240-736633e383dd",
+      "title": "Claude Code: Deep coding at terminal velocity \\ Anthropic",
+      "url": "https://www.anthropic.com/claude-code",
+      "type": "webpage",
+      "thumbnail": "https://cdn.prod.website-files.com/67ce28cfec624e2b733f8a52/68309ab48369f7ad9b4a40e1_open-graph.jpg",
+      "tags": [
+        "ai",
+        "coding",
+        "tools"
+      ],
+      "description": "Revolutionary AI coding assistant",
+      "createdAt": "2025-01-01T10:00:00.000Z",
+      "updatedAt": "2025-01-01T10:00:00.000Z"
+    },
+    {
+      "id": "ad2192f0-18d4-49ac-b09e-e0fe5e75a3e0",
+      "title": "The Terminator",
+      "url": "https://www.imdb.com/find?q=The%20Terminator",
+      "type": "movie",
+      "thumbnail": "https://originalvintagemovieposters.com/wp-content/uploads/2021/10/TERMINATOR-9818-scaled.jpg",
+      "tags": [
+        "sci-fi",
+        "action",
+        "classic"
+      ],
+      "description": "Classic sci-fi action movie",
+      "createdAt": "2025-01-02T14:30:00.000Z",
+      "updatedAt": "2025-01-02T14:30:00.000Z"
+    },
+    {
+      "id": "movie-inception-001",
+      "title": "Inception",
+      "url": "https://www.imdb.com/title/tt1375666/",
+      "type": "movie",
+      "thumbnail": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+      "tags": [
+        "sci-fi",
+        "thriller",
+        "mind-bending"
+      ],
+      "description": "Dom Cobb is a skilled thief who enters people's dreams",
+      "createdAt": "2025-01-04T09:15:00.000Z",
+      "updatedAt": "2025-01-04T09:15:00.000Z"
+    },
+    {
+      "id": "youtube-cooking-002",
+      "title": "YouTube Video",
+      "url": "https://www.youtube.com/watch?v=PUP7U5vTMM0",
+      "type": "video",
+      "thumbnail": "https://image.tensorartassets.com/cdn-cgi/image/anim=true,w=2560,f=jpeg,q=85/posts/images/630317585178683923/71331504-33a6-471b-9a41-1b4dbfeaf4de.jpg",
+      "tags": [
+        "cooking",
+        "tutorial",
+        "gordon-ramsay"
+      ],
+      "description": "Learn to make perfect scrambled eggs",
+      "createdAt": "2025-01-05T11:20:00.000Z",
+      "updatedAt": "2025-09-04T10:08:38.523Z"
+    },
+    {
+      "id": "webpage-github-003",
+      "title": "GitHub - The world's leading software development platform",
+      "url": "https://github.com",
+      "type": "webpage",
+      "thumbnail": "https://github.githubassets.com/images/modules/site/social-cards/github-social.png",
+      "tags": [
+        "development",
+        "git",
+        "open-source"
+      ],
+      "description": "Where the world builds software",
+      "createdAt": "2025-01-06T13:45:00.000Z",
+      "updatedAt": "2025-01-06T13:45:00.000Z"
+    },
+    {
+      "id": "movie-matrix-004",
+      "title": "The Matrix",
+      "url": "https://www.imdb.com/title/tt0133093/",
+      "type": "movie",
+      "thumbnail": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+      "tags": [
+        "sci-fi",
+        "action",
+        "philosophy"
+      ],
+      "description": "A computer programmer discovers reality is a simulation",
+      "createdAt": "2025-01-07T08:30:00.000Z",
+      "updatedAt": "2025-01-07T08:30:00.000Z"
+    },
+    {
+      "id": "vimeo-nature-005",
+      "title": "Beautiful Nature Documentary",
+      "url": "https://vimeo.com/148003889",
+      "type": "video",
+      "thumbnail": "https://i.vimeocdn.com/video/548134493-960x540.jpg",
+      "tags": [
+        "nature",
+        "documentary",
+        "relaxing"
+      ],
+      "description": "Stunning footage of nature and wildlife",
+      "createdAt": "2025-01-08T15:10:00.000Z",
+      "updatedAt": "2025-01-08T15:10:00.000Z"
+    },
+    {
+      "id": "webpage-mdn-006",
+      "title": "MDN Web Docs",
+      "url": "https://developer.mozilla.org",
+      "type": "webpage",
+      "thumbnail": "https://developer.mozilla.org/mdn-social-share.png",
+      "tags": [
+        "documentation",
+        "web-dev",
+        "reference"
+      ],
+      "description": "The best resource for web developers",
+      "createdAt": "2025-01-09T12:00:00.000Z",
+      "updatedAt": "2025-01-09T12:00:00.000Z"
+    },
+    {
+      "id": "movie-interstellar-007",
+      "title": "Interstellar",
+      "url": "https://www.imdb.com/title/tt0816692/",
+      "type": "movie",
+      "thumbnail": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+      "tags": [
+        "sci-fi",
+        "space",
+        "emotional"
+      ],
+      "description": "A team of explorers travel through a wormhole in space",
+      "createdAt": "2025-01-10T17:25:00.000Z",
+      "updatedAt": "2025-01-10T17:25:00.000Z"
+    },
+    {
+      "id": "youtube-tech-008",
+      "title": "The Future of AI - Tech Talk 2024",
+      "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+      "type": "video",
+      "thumbnail": "https://img.youtube.com/vi/kCc8FmEb1nY/hqdefault.jpg",
+      "tags": [
+        "ai",
+        "technology",
+        "future"
+      ],
+      "description": "Comprehensive overview of AI developments",
+      "createdAt": "2025-01-11T10:45:00.000Z",
+      "updatedAt": "2025-01-11T10:45:00.000Z"
+    },
+    {
+      "id": "webpage-tailwind-009",
+      "title": "Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.",
+      "url": "https://tailwindcss.com",
+      "type": "webpage",
+      "thumbnail": "https://tailwindcss.com/opengraph-image.jpg?fbee406903dc9e88",
+      "tags": [
+        "css",
+        "framework",
+        "design"
+      ],
+      "description": "Tailwind CSS is a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.",
+      "createdAt": "2025-01-12T14:20:00.000Z",
+      "updatedAt": "2025-09-04T10:04:06.091Z"
+    },
+    {
+      "id": "movie-dune-010",
+      "title": "Dune",
+      "url": "https://www.imdb.com/title/tt1160419/",
+      "type": "movie",
+      "thumbnail": "https://m.media-amazon.com/images/M/MV5BN2FjNmEyNWMtYzM0ZS00NjIyLTg5YzYtYThlMGVjNzE1OGViXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+      "tags": [
+        "sci-fi",
+        "epic",
+        "desert"
+      ],
+      "description": "Paul Atreides leads a rebellion to free his people",
+      "createdAt": "2025-01-13T19:30:00.000Z",
+      "updatedAt": "2025-01-13T19:30:00.000Z"
+    },
+    {
+      "id": "vimeo-art-011",
+      "title": "Abstract Art in Motion",
+      "url": "https://vimeo.com/127203262",
+      "type": "video",
+      "thumbnail": "https://i.vimeocdn.com/video/506908434-960x540.jpg",
+      "tags": [
+        "art",
+        "abstract",
+        "creative"
+      ],
+      "description": "Mesmerizing abstract art animation",
+      "createdAt": "2025-01-14T16:15:00.000Z",
+      "updatedAt": "2025-01-14T16:15:00.000Z"
+    },
+    {
+      "id": "webpage-nextjs-012",
+      "title": "Next.js by Vercel - The React Framework",
+      "url": "https://nextjs.org",
+      "type": "webpage",
+      "thumbnail": "http://www.landersweb.com/images/nextjs.png",
+      "tags": [
+        "react",
+        "framework",
+        "fullstack"
+      ],
+      "description": "Next.js by Vercel is the full-stack React framework for the web.",
+      "createdAt": "2025-01-15T11:50:00.000Z",
+      "updatedAt": "2025-09-04T10:09:15.849Z"
+    },
+    {
+      "id": "youtube-music-013",
+      "title": "Lofi Hip Hop Radio - 24/7 Study Music",
+      "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+      "type": "video",
+      "thumbnail": "https://img.youtube.com/vi/jfKfPfyJRdk/hqdefault.jpg",
+      "tags": [
+        "music",
+        "lofi",
+        "study"
+      ],
+      "description": "Relaxing beats to study and work to",
+      "createdAt": "2025-01-16T09:00:00.000Z",
+      "updatedAt": "2025-01-16T09:00:00.000Z"
+    }
+  ],
+  "lastUpdated": "2025-09-04T10:13:22.753Z"
+}

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  bookma:
+    build: .
+    container_name: bookma
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+      - bookma_node_modules:/app/node_modules
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    networks:
+      - bookma_network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  bookma_node_modules:
+
+networks:
+  bookma_network:
+    driver: bridge
