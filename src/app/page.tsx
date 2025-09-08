@@ -15,6 +15,7 @@ export default function Home() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | null>(null);
+  const [prefillData, setPrefillData] = useState<{title?: string; url?: string; thumbnail?: string} | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -23,6 +24,19 @@ export default function Home() {
   // Load bookmarks on component mount
   useEffect(() => {
     loadBookmarks();
+    
+    // Check for URL parameters (from bookmarklet)
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get('title');
+    const url = urlParams.get('url');
+    const thumbnail = urlParams.get('thumbnail');
+    
+    if (title || url || thumbnail) {
+      setPrefillData({ title: title || undefined, url: url || undefined, thumbnail: thumbnail || undefined });
+      setIsAddModalOpen(true);
+      // Clean up URL parameters
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
   }, []);
 
   // Filter bookmarks when search or tags change
@@ -282,8 +296,12 @@ export default function Home() {
       {/* Add Bookmark Modal */}
       <AddBookmarkModal
         isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
+        onClose={() => {
+          setIsAddModalOpen(false);
+          setPrefillData(null); // Clear prefill data when closing
+        }}
         onAdd={handleAddBookmark}
+        prefillData={prefillData}
       />
 
       {/* Edit Bookmark Modal */}

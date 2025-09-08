@@ -4,7 +4,7 @@
       "id": "ad2192f0-18d4-49ac-b09e-e0fe5e75a3e0",
       "title": "The Terminator",
       "url": "https://www.imdb.com/find?q=The%20Terminator",
-      "thumbnail": "https://originalvintagemovieposters.com/wp-content/uploads/2021/10/TERMINATOR-9818-scaled.jpg",
+      "thumbnail": "https://www.sideshow.com/cdn-cgi/image/quality=90,f=auto/https://www.sideshow.com/storage/product-images/906890/t-800-terminator_terminator_gallery_66ba5f1be194f.jpg",
       "tags": [
         "sci-fi",
         "action",
@@ -12,7 +12,7 @@
       ],
       "description": "Classic sci-fi action movie",
       "createdAt": "2025-01-02T14:30:00.000Z",
-      "updatedAt": "2025-01-02T14:30:00.000Z"
+      "updatedAt": "2025-09-08T10:41:34.306Z"
     },
     {
       "id": "movie-inception-001",
@@ -207,5 +207,5 @@
       "updatedAt": "2025-09-06T17:08:43.712Z"
     }
   ],
-  "lastUpdated": "2025-09-06T17:20:10.989Z"
+  "lastUpdated": "2025-09-08T10:41:34.306Z"
 }
